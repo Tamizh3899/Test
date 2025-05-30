@@ -1,75 +1,493 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Under Processing</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            text-align: center;
-            background-color: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 600px;
-            font-size: 18px;
-        }
-        h1 {
-            font-size: 48px;
-            color: #388e3c;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 20px;
-            color: #388e3c;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-        .email-link {
-            font-size: 20px;
-            font-weight: bold;
-            color: #388e3c;
-            text-decoration: none;
-            border: 2px solid #388e3c;
-            padding: 10px 25px;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
-        .email-link:hover {
-            background-color: #388e3c;
-            color: white;
-            border-color: #388e3c;
-        }
-        .footer {
-            margin-top: 40px;
-            font-size: 14px;
-            color: #388e3c;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Super Developer Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+  /* Basic Reset & Body */
+  body {
+    background-color: #121212;
+    color: #eee;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+    scroll-behavior: smooth;
+    margin: 0;
+  }
+
+  /* Navbar */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0; right: 0;
+    background: rgba(18,18,18,0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 12px 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(0, 255, 255, 0.15);
+    box-shadow: 0 2px 12px rgba(0,255,255,0.3);
+  }
+
+  nav a {
+    color: #00e5ff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.6;
+    cursor: pointer;
+  }
+  nav a:hover,
+  nav a.active {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  /* Spacer to avoid content hidden under navbar */
+  .nav-spacer {
+    height: 52px; /* match nav height */
+  }
+
+  /* Section Titles */
+  h1 {
+    text-align: center;
+    color: #00ffff;
+    font-size: 3em;
+    margin-bottom: 40px;
+  }
+  h2 {
+    border-left: 5px solid #00bcd4;
+    padding-left: 10px;
+    color: #00e5ff;
+    margin-top: 50px;
+    font-size: 2em;
+  }
+
+  /* Content Cards */
+  .project, .certification, .experience, .post, .feature {
+    background: #1e1e1e;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,255,255,0.1);
+    transition: 0.3s;
+  }
+  .project:hover, .certification:hover, .experience:hover, .post:hover, .feature:hover {
+    box-shadow: 0 0 15px rgba(0,255,255,0.3);
+  }
+
+  img {
+    margin-top: 15px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(0,255,255,0.2);
+  }
+
+  a {
+    color: #00e5ff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .feature i {
+    color: #00e5ff;
+    margin-right: 10px;
+  }
+  small {
+    color: #aaa;
+  }
+  /* Intro Section */
+.intro-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 900px;
+    margin: auto;
+    flex-wrap: wrap;
+  }
+
+  .intro-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    white-space: nowrap;
+    min-width: 350px;
+    height: 3rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Blinking cursor style */
+  .cursor {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #00e5ff;
+    margin-left: 5px;
+    animation: blink 1s step-start infinite;
+    user-select: none;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+
+  img {
+    max-width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #00e5ffaa;
+  }
+
+
+  .simple-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #00e5ff;
+    color: #000;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+  }
+
+  .simple-btn:hover {
+    background-color: #00bcd4;
+    color: #fff;
+  }
+
+  section {
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: #1e1e1e;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,255,255,0.1);
+  }
+
+  h2 {
+    color: #00e5ff;
+    border-left: 5px solid #00bcd4;
+    padding-left: 10px;
+    margin-bottom: 20px;
+  }
+
+.intro-text {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 40px 0 20px;
+  color: #00e5ff;
+}
+
+.icon-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+.icon {
+  font-size: 42px;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: #1e1e1e;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.25);
+  cursor: pointer;
+  animation: floatUpDown 4s ease-in-out infinite;
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+  color: white;
+  position: relative;
+  text-align: center;
+  padding: 10px;
+}
+
+.icon i,
+.icon img {
+  margin-bottom: 8px;
+}
+
+.icon span {
+  font-size: 14px;
+  color: #ffffff;
+  margin-top: 5px;
+}
+
+/* Hover effect */
+.icon:hover {
+  transform: scale(1.1) rotateX(5deg) rotateY(5deg);
+  box-shadow:
+    0 0 15px currentColor,
+    0 0 30px currentColor,
+    0 0 40px currentColor;
+}
+
+/* Animation */
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Django image */
+.icon img {
+  width: 42px;
+  height: auto;
+  filter: invert(60%) sepia(100%) saturate(500%) hue-rotate(150deg);
+}
+
+/* Individual brand colors */
+.icon[title="CD"] i {
+  color: #999999;
+}
+
+.icon[title="HTML"] i {
+  color: #E34F26;
+}
+
+.icon[title="CSS"] i {
+  color: #1572B6;
+}
+
+.icon[title="JS"] i {
+  color: #F7DF1E;
+  filter: none;
+}
+
+.icon[title="Python"] i {
+  color: #3776AB;
+}
+
+.core-java i {
+  color: #5382a1;
+}
+
+.advanced-java i {
+  color: #b07219;
+}
+
+.icon[title="Servlet"] i {
+  color: #6d6d6d;
+}
+
+.icon[title="C"] i {
+  color: #00599C;
+}
+
+.icon[title="C++"] i {
+  color: #00599C;
+}
+
+.icon[title="JSP"] i {
+  color: #007396;
+}
+
+.icon[title="SQL"] i {
+  color: #4479A1;
+}
+
+.icon[title="DB"] i {
+  color: #4CAF50;
+}
+
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Website Under Processing</h1>
-        <p>We are currently working on the website with our Bulls-i-Elite team to bring you a better experience.</p>
-        <p>If you wish to visit the website, feel free to send us a request.</p>
-        <a href="mailto:tamizharasan3899@gmail.com" class="email-link">Send Request</a>
-        <div class="footer">
-            <p>&copy; 2025 Bulls-i-Elite Team</p>
-        </div>
-    </div>
+
+<nav id="navbar">
+  <a href="#projects" class="nav-link"><i class="fas fa-code"></i>Projects</a>
+  <a href="#certifications" class="nav-link"><i class="fas fa-certificate"></i>Certifications</a>
+  <a href="#experience" class="nav-link"><i class="fas fa-briefcase"></i>Experience</a>
+  <a href="#posts" class="nav-link"><i class="fas fa-blog"></i>Posts</a>
+  <a href="#features" class="nav-link"><i class="fas fa-star"></i>Features</a>
+</nav>
+
+<!-- Spacer for fixed nav -->
+<div class="nav-spacer"></div>
+
+<div class="intro-container">
+ <div class="intro-text">
+  I am a&nbsp;<span id="typed-text"></span><span class="cursor">|</span>
+</div>
+
+  <img src="static/TamizhPro.jpg" alt="Your Image" />
+</div>
+
+<br>
+<div class="intro-text">Skills</div>
+
+<div class="icon-container" aria-label="Technology icons with animations" role="list">
+  <div class="icon" title="HTML"><i class="fab fa-html5"></i><span>HTML</span></div>
+  <div class="icon" title="CSS"><i class="fab fa-css3-alt"></i><span>CSS</span></div>
+  <div class="icon" title="JS"><i class="fab fa-js"></i><span>JavaScript</span></div>
+  <div class="icon" title="Python"><i class="fab fa-python"></i><span>Python</span></div>
+  <div class="icon core-java" title="Core Java"><i class="fab fa-java"></i><span>Core Java</span></div>
+  <div class="icon advanced-java" title="Advanced Java"><i class="fab fa-java"></i><span>Advanced Java</span></div>
+  <div class="icon" title="Servlet"><i class="fas fa-file-code"></i><span>Servlet</span></div>
+  <div class="icon" title="C"><i class="fas fa-code"></i><span>C</span></div>
+  <div class="icon" title="C++"><i class="fas fa-code-branch"></i><span>C++</span></div>
+  <div class="icon" title="Django">
+    <img src="https://static.djangoproject.com/img/logos/django-logo-negative.svg" alt="Django">
+    <span>Django</span>
+  </div>
+  <div class="icon" title="JSP"><i class="fas fa-file-code"></i><span>JSP</span></div>
+  <div class="icon" title="SQL"><i class="fas fa-database"></i><span>SQL</span></div>
+  <div class="icon" title="DB"><i class="fas fa-server"></i><span>DB</span></div>
+</div>
+
+
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="card">
+    <h3>Project Name</h3>
+    <p>Short project description goes here.</p>
+    <a href="https://example.com/project-link" class="simple-btn" target="_blank">Visit Project</a>
+  </div>
+</section>
+
+<section id="certifications">
+  <h2>Certifications</h2>
+  <div class="card">
+    <strong>Certification Title</strong> from Issuer Name (2024-05-30)
+    <p><a href="https://example.com/certificate-link" class="simple-btn" target="_blank">View Certificate</a></p>
+  </div>
+</section>
+
+<section id="experience">
+  <h2>Experience</h2>
+  <div class="card">
+    <strong>Role</strong> at Company Name (2020-2023)
+    <p>Brief description of the experience.</p>
+    <a href="https://example.com/experience-link" class="simple-btn" target="_blank">See Details</a>
+  </div>
+</section>
+
+<section id="posts">
+  <h2>Posts</h2>
+  <div class="card">
+    <h4>Post Title</h4>
+    <p>Summary or excerpt of the post content.</p>
+    <a href="https://example.com/post-link" class="simple-btn" target="_blank">Read More</a>
+  </div>
+</section>
+
+<section id="features">
+  <h2>Features</h2>
+  <div class="card">
+    <i class="fas fa-code"></i> <strong>Feature Title</strong>
+    <p>Short description of the feature.</p>
+    <a href="https://example.com/feature-link" class="simple-btn" target="_blank">Learn More</a>
+  </div>
+</section>
+
+<script>
+  const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-link");
+const navbar = document.getElementById("navbar");
+
+// Smooth scroll on nav link clicks with offset for fixed navbar
+navLinks.forEach(link => {
+  link.addEventListener("click", function(e) {
+    e.preventDefault();
+    const targetID = this.getAttribute("href").substring(1);
+    const targetSection = document.getElementById(targetID);
+    if (targetSection) {
+      window.scrollTo({
+        top: targetSection.offsetTop - navbar.offsetHeight, // offset navbar height
+        behavior: "smooth"
+      });
+    }
+  });
+});
+
+// Highlight nav link on scroll & navbar background change
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - navbar.offsetHeight - 10; // slight buffer
+    if (pageYOffset >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === "#" + current) {
+      link.classList.add("active");
+    }
+  });
+
+  if (window.scrollY > 20) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
+
+
+ const fullText = "Software_Developer";
+const typedTextEl = document.getElementById("typed-text");
+
+let index = 0;
+let deleting = false;
+let speed = 100;
+
+function type() {
+  if (!deleting) {
+    typedTextEl.textContent = fullText.substring(0, index + 1);
+    index++;
+    if (index === fullText.length) {
+      setTimeout(() => {
+        deleting = true;
+        type();
+      }, 1500);
+    } else {
+      setTimeout(type, speed);
+    }
+  } else {
+    typedTextEl.textContent = fullText.substring(0, index - 1);
+    index--;
+    if (index === 0) {
+      deleting = false;
+      setTimeout(type, 500);
+    } else {
+      setTimeout(type, speed / 2);
+    }
+  }
+}
+
+type();
+
+</script>
+
 </body>
 </html>
